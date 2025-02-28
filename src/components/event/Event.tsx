@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 export const Event = ({ index }: { index: number }) => {
-  console.log("index: ", index);
   return (
     <div
       className={cn(
