@@ -2,7 +2,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { CalendarEventType } from "@/data/data";
+import { CalendarEventType, data } from "@/data/data";
 import { getMonthMatrix } from "./getTime";
 
 interface DateStoreType {
@@ -84,16 +84,53 @@ export const useDateStore = create<DateStoreType>()(
     ),
   ),
 );
-export const useEventStore = create<EventStore>((set) => ({
-  events: [],
-  isPopoverOpen: false,
-  isEventSummaryOpen: false,
-  selectedEvent: null,
-  setEvents: (events) => set({ events }),
-  openPopover: () => set({ isPopoverOpen: true }),
-  closePopover: () => set({ isPopoverOpen: false }),
-  openEventSummary: (event) =>
-    set({ isEventSummaryOpen: true, selectedEvent: event }),
-  closeEventSummary: () =>
-    set({ isEventSummaryOpen: false, selectedEvent: null }),
-}));
+
+export const useEventStore = create<EventStore>()(
+  devtools(
+    persist(
+      (set) => ({
+        events: [],
+        isPopoverOpen: false,
+        isEventSummaryOpen: false,
+        selectedEvent: null,
+        setEvents: (events) => set({ events }),
+        openPopover: () => set({ isPopoverOpen: true }),
+        closePopover: () => set({ isPopoverOpen: false }),
+        openEventSummary: (event) =>
+          set({ isEventSummaryOpen: true, selectedEvent: event }),
+        closeEventSummary: () =>
+          set({ isEventSummaryOpen: false, selectedEvent: null }),
+      }),
+      { name: "event_data", skipHydration: true },
+    ),
+  ),
+);
+
+export const useCalendarEventStore = create<{
+  events: CalendarEventType[];
+  loading: boolean;
+  error: string | null | unknown;
+  fectEvent: () => Promise<void>;
+}>()(
+  devtools(
+    persist(
+      (set) => ({
+        events: [],
+        loading: false,
+        error: null,
+
+        fectEvent: async () => {
+          set({ loading: true, error: null });
+
+          try {
+            const response = data;
+            set({ events: response, loading: false });
+          } catch (error) {
+            set({ error: error, loading: false });
+          }
+        },
+      }),
+      { name: "calendar_event_data", skipHydration: true },
+    ),
+  ),
+);

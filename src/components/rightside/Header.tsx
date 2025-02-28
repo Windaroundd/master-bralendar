@@ -13,10 +13,12 @@ import dayjs from "dayjs";
 import { useDateStore } from "@/lib/store";
 
 export const Header = () => {
-  const { nextMonth, prevMonth, setMonthYear, month, year } = useDateStore();
+  const { nextMonth, prevMonth, setMonthYear, month, year, setDate } =
+    useDateStore();
 
   const handleTodayClick = () => {
     setMonthYear(dayjs().month(), dayjs().year());
+    setDate(dayjs());
   };
 
   return (
@@ -24,11 +26,11 @@ export const Header = () => {
       <div className="flex items-center justify-center gap-6">
         <Button
           onClick={handleTodayClick}
-          className="border-darkBlue text-darkBlue hover:bg-lightBlue rounded-2xl border border-solid bg-white py-5 text-lg hover:text-white"
+          className="rounded-2xl border border-solid border-darkBlue bg-white py-5 text-lg text-darkBlue hover:bg-lightBlue hover:text-white"
         >
           Today
         </Button>
-        <div className="text-lightBlue flex items-center justify-center gap-5">
+        <div className="flex items-center justify-center gap-5 text-lightBlue">
           <SlArrowLeft
             onClick={prevMonth}
             className="cursor-pointer font-bold"
@@ -40,14 +42,14 @@ export const Header = () => {
           ></SlArrowLeft>
         </div>
 
-        <h3 className="text-darkBlue text-2xl font-bold">
+        <h3 className="text-2xl font-bold text-darkBlue">
           {" "}
           {dayjs(new Date(year, month)).format("MMMM YYYY")}
         </h3>
       </div>
       <div>
         <Select>
-          <SelectTrigger className="bg-lightBlue w-[130px] rounded-2xl py-5 text-lg !text-white">
+          <SelectTrigger className="w-[130px] rounded-2xl bg-lightBlue py-5 text-lg !text-white">
             <SelectValue placeholder="Month" />
           </SelectTrigger>
           <SelectContent>

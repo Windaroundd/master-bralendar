@@ -1,30 +1,47 @@
+import { CalendarEventType } from "@/data/data";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { BsCameraVideo } from "react-icons/bs";
 
-const EventCard = () => {
+const EventCard = ({ event }: { event: CalendarEventType }) => {
   return (
-    <div className="border-darkBlue bg-lightOrange flex justify-between rounded-md border-l-4 p-4">
+    <div
+      className={cn(
+        "mb-3 flex justify-between rounded-md border-l-4 border-darkBlue p-4",
+        event.event_type === "Appointment" ? "bg-lightOrange" : "bg-darkOrange",
+      )}
+    >
       <div>
-        <h5 className="text-darkBlue font-base text-xl">First Session</h5>
-        <p className="text-sm text-gray-400">9:00 AM</p>
-        <div className="mt-2 flex items-center justify-between gap-5">
-          <Image
-            src="/img/khabanh.jpg"
-            alt=""
-            width={50}
-            height={50}
-            className="h-[40px] w-[40px] rounded-full"
-          />
-          <p className="text-lightBlue text-sm underline">
-            View Client Profile
-          </p>
-        </div>
+        <h5 className="font-base text-lg text-darkBlue">{event?.title}</h5>
+        <p className="text-sm text-gray-400">{event.time_start}</p>
+        {event.event_type === "Appointment" && (
+          <div className="mt-2 flex items-center justify-start gap-5">
+            <Image
+              src="/img/khabanh.jpg"
+              alt=""
+              width={50}
+              height={50}
+              className="h-[40px] w-[40px] rounded-full"
+            />
+            {event.client?.profile_url && (
+              <Link
+                href={event.client.profile_url}
+                className="text-sm text-lightBlue underline"
+              >
+                View Client Profile
+              </Link>
+            )}
+          </div>
+        )}
       </div>
       <div>
-        <div className="bg-darkBlue flex h-[40px] w-[40px] items-center justify-center rounded-full">
-          <BsCameraVideo className="h-[25px] w-[25px] text-white" />
-        </div>
+        {event.event_type === "Appointment" && (
+          <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-darkBlue">
+            <BsCameraVideo className="h-[25px] w-[25px] text-white" />
+          </div>
+        )}
       </div>
     </div>
   );
