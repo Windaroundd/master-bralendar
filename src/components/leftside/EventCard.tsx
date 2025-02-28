@@ -1,11 +1,16 @@
 import { CalendarEventType } from "@/data/data";
 import { cn } from "@/lib/utils";
+import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BsCameraVideo } from "react-icons/bs";
 
 const EventCard = ({ event }: { event: CalendarEventType }) => {
+  const startTime = dayjs(event.time_start);
+  const timeFormatted = startTime.format("h:mm A");
+  const offset = startTime.format("Z"); // => "+08:00"
+  const gmtFormatted = `GMT${offset.startsWith("-") ? "" : "+"}${offset.replace(":00", "")}`;
   return (
     <div
       className={cn(
@@ -15,7 +20,7 @@ const EventCard = ({ event }: { event: CalendarEventType }) => {
     >
       <div>
         <h5 className="font-base text-lg text-darkBlue">{event?.title}</h5>
-        <p className="text-sm text-gray-400">{event.time_start}</p>
+        <p className="text-sm text-gray-400">{`${timeFormatted} ${gmtFormatted}`}</p>
         {event.event_type === "Appointment" && (
           <div className="mt-2 flex items-center justify-start gap-5">
             <Image
