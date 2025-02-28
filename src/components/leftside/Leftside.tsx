@@ -8,7 +8,9 @@ const Leftside = () => {
     <div>
       <div className="border border-dotted p-5 pt-10">
         <Header />
-        <MiniCalendar />
+        <div className="mt-4">
+          <MiniCalendar />
+        </div>
       </div>
       <div className="p-5">
         <UpComingEvent />

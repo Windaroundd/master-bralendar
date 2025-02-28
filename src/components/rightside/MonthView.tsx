@@ -3,11 +3,10 @@ import React, { Fragment } from "react";
 
 import MonthViewBox from "./MonthViewBox";
 import { useDateStore } from "@/lib/store";
+import { weekDays } from "@/data/data";
 
 const MonthView = () => {
-  const { twoDMonthArray } = useDateStore();
-
-  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const { calendar } = useDateStore();
 
   return (
     <>
@@ -19,7 +18,7 @@ const MonthView = () => {
         ))}
       </div>
       <div className="grid grid-cols-7 grid-rows-6">
-        {twoDMonthArray?.map((row, i) => (
+        {calendar?.map((row, i) => (
           <Fragment key={i}>
             {row.map((day, index) => (
               <MonthViewBox key={index} day={day} />

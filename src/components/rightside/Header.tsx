@@ -13,19 +13,12 @@ import dayjs from "dayjs";
 import { useDateStore } from "@/lib/store";
 
 export const Header = () => {
-  const { setMonth, selectedMonthIndex } = useDateStore();
+  const { nextMonth, prevMonth, setMonthYear, month, year } = useDateStore();
 
   const handleTodayClick = () => {
-    setMonth(dayjs().month());
+    setMonthYear(dayjs().month(), dayjs().year());
   };
 
-  const handlePrevClick = () => {
-    setMonth(selectedMonthIndex - 1);
-  };
-
-  const handleNextClick = () => {
-    setMonth(selectedMonthIndex + 1);
-  };
   return (
     <div className="flex justify-between">
       <div className="flex items-center justify-center gap-6">
@@ -37,16 +30,20 @@ export const Header = () => {
         </Button>
         <div className="text-lightBlue flex items-center justify-center gap-5">
           <SlArrowLeft
-            onClick={handlePrevClick}
+            onClick={prevMonth}
             className="cursor-pointer font-bold"
           ></SlArrowLeft>
 
           <SlArrowLeft
-            onClick={handleNextClick}
+            onClick={nextMonth}
             className="rotate-180 cursor-pointer"
           ></SlArrowLeft>
         </div>
-        <h3 className="text-darkBlue text-2xl font-bold">April 2021</h3>
+
+        <h3 className="text-darkBlue text-2xl font-bold">
+          {" "}
+          {dayjs(new Date(year, month)).format("MMMM YYYY")}
+        </h3>
       </div>
       <div>
         <Select>
