@@ -59,6 +59,7 @@ const MonthViewBox = ({ day }: { day: dayjs.Dayjs | null }) => {
         className={cn(
           "flex h-36 w-full flex-col items-center border border-dotted py-4 text-center font-semibold text-gray-500",
           !isDayInMonth(day, month) && "text-gray-300",
+          dayEvents.length > 0 && "bg-[#FFF8E1] text-gray-500",
         )}
         // onClick={handleClick}
       >
