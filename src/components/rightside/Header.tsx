@@ -26,7 +26,7 @@ export const Header = () => {
       <div className="flex items-center justify-center gap-6">
         <Button
           onClick={handleTodayClick}
-          className="rounded-2xl border border-solid border-darkBlue bg-white py-5 text-lg text-darkBlue hover:bg-lightBlue hover:text-white"
+          className="hidden rounded-2xl border border-solid border-darkBlue bg-white py-5 text-lg text-darkBlue hover:bg-lightBlue hover:text-white md:flex"
         >
           Today
         </Button>
@@ -47,7 +47,7 @@ export const Header = () => {
           {dayjs(new Date(year, month)).format("MMMM YYYY")}
         </h3>
       </div>
-      <div>
+      <div className="hidden md:block">
         <Select>
           <SelectTrigger className="w-[130px] rounded-2xl bg-lightBlue py-5 text-lg !text-white">
             <SelectValue placeholder="Month" />

@@ -9,7 +9,7 @@ const Rightside = () => {
   const { isPopoverOpen, closePopover } = useEventStore();
   const { userSelectedDate } = useDateStore();
   return (
-    <div>
+    <div className="bg-[var(--background)] md:bg-white">
       <div className="p-5">
         <Header />
       </div>

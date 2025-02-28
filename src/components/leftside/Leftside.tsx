@@ -5,7 +5,7 @@ import UpComingEvent from "./UpComingEvent";
 
 const Leftside = () => {
   return (
-    <div>
+    <div className="bg-[var(--background)] md:bg-white">
       <div className="border border-dotted p-5 pt-10">
         <Header />
         <div className="mt-4">

@@ -13,11 +13,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container mx-auto mt-10 flex justify-between gap-4">
-      <div className="w-1/4 border border-dotted bg-white">
+    <div className="container mx-auto mt-10 flex flex-col-reverse flex-wrap justify-between gap-4 md:flex-row md:flex-nowrap">
+      <div className="w-full border border-dotted bg-white md:w-1/4">
         <Leftside />
       </div>
-      <div className="w-3/4 border border-dotted bg-white">
+      <div className="w-full border border-dotted bg-white md:w-3/4">
         <Rightside />
       </div>
     </div>

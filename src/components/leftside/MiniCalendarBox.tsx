@@ -27,7 +27,7 @@ const MiniCalendarBox = ({ day, month }: { day: Dayjs; month: number }) => {
         isToday && "bg-darkBlue text-white",
         !isDayInMonth(day, month) && "text-gray-300",
         isSelected && !isToday && "bg-[#7bb0e1] text-white",
-        dayEvents.length > 0 && "bg-[#FFF8E1] text-gray-500",
+        dayEvents.length > 0 && !isSelected && "bg-[#FFF8E1] text-gray-500",
       )}
     >
       <div>{day?.format("D")}</div>
