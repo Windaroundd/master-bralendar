@@ -10,7 +10,7 @@ const EventCard = ({ event }: { event: CalendarEventType }) => {
   const startTime = dayjs(event.time_start);
   const timeFormatted = startTime.format("h:mm A");
   const offset = startTime.format("Z"); // => "+08:00"
-  const gmtFormatted = `GMT${offset.startsWith("-") ? "" : "+"}${offset.replace(":00", "")}`;
+  const gmtFormatted = `GMT${offset.startsWith("-") ? "" : ""}${offset.replace(":00", "")}`;
   return (
     <div
       className={cn(
